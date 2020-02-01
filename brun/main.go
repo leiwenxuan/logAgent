@@ -16,4 +16,8 @@ func main() {
 	base.InitLog(conf)
 	app := infra.New(conf)
 	app.Start()
+	// 初始资源阻塞进程
+	ch := make(chan int, 1)
+	<-ch
+
 }
