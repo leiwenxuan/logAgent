@@ -1,0 +1,18 @@
+{
+    "editor.fontSize": 16,
+    "editor.fontFamily": "'Jetbrains Mono',Consolas, 'Courier New', monospace",
+    "files.autoSave": "onFocusChange",
+    "editor.formatOnSave": true,
+    // "go.gopath": "F:\\code\\002Golang\\logAgent", // 当前工作空间${wordspaceRoot}加上系统 GOPATH 目录
+    "go.formatOnSave": true, //在保存代码时自动格式化代码
+    "go.formatTool": "goimports", //使用 goimports 工具进行代码格式化，或者使用 goreturns 和 gofmt
+    // "go.buildOnSave": true, //在保存代码时自动编译代码
+    // "go.lintOnSave": true, //在保存代码时自动检查代码可以优化的地方，并给出建议
+    // "go.vetOnSave": false, //在保存代码时自动检查潜在的错误
+    "go.coverOnSave": false, //在保存代码时执行测试，并显示测试覆盖率
+    "go.useCodeSnippetsOnFunctionSuggest": true, //使用代码片段作为提示
+    "go.gocodeAutoBuild": false, //代码自动编译构建,
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "go.autocompleteUnimportedPackages": true,
+
+}
