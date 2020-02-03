@@ -10,10 +10,15 @@ import (
 	"github.com/Shopify/sarama"
 )
 
-var clientKafka *sarama.SyncProducer
+var clientKafka sarama.SyncProducer
 
 type KafkaStarter struct {
 	infra.BaseStarter
+}
+
+func KakfaClient() sarama.SyncProducer {
+	Check(clientEtcd)
+	return clientKafka
 }
 
 func (k *KafkaStarter) Setup(ctx infra.StarterContext) {
@@ -34,5 +39,5 @@ func (k *KafkaStarter) Setup(ctx infra.StarterContext) {
 		fmt.Println("producer close, err:", err)
 		return
 	}
-	clientKafka = &client
+	clientKafka = client
 }

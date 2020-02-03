@@ -2,13 +2,6 @@ package base
 
 import (
 	"fmt"
-	rotatelogs "github.com/lestrrat/go-file-rotatelogs"
-	"github.com/mattn/go-colorable"
-	"github.com/rifflock/lfshook"
-	log "github.com/sirupsen/logrus"
-	"github.com/tietang/go-utils"
-	"github.com/tietang/props/kvs"
-	prefixed "github.com/x-cray/logrus-prefixed-formatter"
 	"io"
 	"os"
 	"path"
@@ -16,6 +9,14 @@ import (
 	"runtime"
 	"strings"
 	"time"
+
+	rotatelogs "github.com/lestrrat/go-file-rotatelogs"
+	"github.com/mattn/go-colorable"
+	"github.com/rifflock/lfshook"
+	log "github.com/sirupsen/logrus"
+	"github.com/tietang/go-utils"
+	"github.com/tietang/props/kvs"
+	prefixed "github.com/x-cray/logrus-prefixed-formatter"
 )
 
 var formatter *prefixed.TextFormatter
@@ -70,6 +71,8 @@ var log_writer io.Writer
 
 //初始化log配置，配置logrus日志文件滚动生成和
 func InitLog(conf kvs.ConfigSource) {
+	// 设置日志格式为json格式
+	//log.SetFormatter(&log.JSONFormatter{})
 	//设置日志输出级别
 	level, err := log.ParseLevel(conf.GetDefault("log.level", "info"))
 	if err != nil {

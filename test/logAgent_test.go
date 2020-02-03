@@ -1,15 +1,20 @@
-package main
+package test
 
 import (
-	"gitee.com/lwx0416/logAgent/infra"
-	"gitee.com/lwx0416/logAgent/infra/base"
-	"gitee.com/lwx0416/logAgent/servers"
+	"testing"
+
 	"github.com/sirupsen/logrus"
 	"github.com/tietang/props/ini"
 	"github.com/tietang/props/kvs"
+
+	"gitee.com/lwx0416/logAgent/infra"
+	"gitee.com/lwx0416/logAgent/infra/base"
+	"gitee.com/lwx0416/logAgent/servers"
 )
 
-func main() {
+func TestGetEtcdConfPath(t *testing.T) {
+	infra.Register(&base.EtcdStarter{})
+	infra.Register(&base.KafkaStarter{})
 
 	file := kvs.GetCurrentFilePath("conf.ini", 1)
 	logrus.Info("配置文件： ", file)
@@ -17,13 +22,5 @@ func main() {
 	base.InitLog(conf)
 	app := infra.New(conf)
 	app.Start()
-
-	// 初始化监听器
 	_ = servers.GlogMgr.WatchTailJob()
-	// 启动kafka监听器
-	servers.SendToKafka()
-	// 初始资源阻塞进程
-	ch := make(chan int, 1)
-	<-ch
-
 }
