@@ -10,7 +10,7 @@
 | elasticsearch | 承载了数据存储和查询的功能                                   |      |
 | Kibana        | 前端调接口提供可配置的可视化                                 |      |
 
-![logAgent](F:\code\008文档\学习笔记总结\mysql\img\logAgent.png)
+![logAgent](./doc/logAgent.png)
 
 ## 1.2 启动方式
 
