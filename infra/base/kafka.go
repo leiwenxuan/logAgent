@@ -1,7 +1,6 @@
 package base
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/sirupsen/logrus"
@@ -10,18 +9,27 @@ import (
 	"github.com/Shopify/sarama"
 )
 
-var clientKafka sarama.SyncProducer
+var kafkaProducer sarama.SyncProducer
+var kafkaConsumer sarama.Consumer
 
-type KafkaStarter struct {
+type KafkaProducerStarter struct {
+	infra.BaseStarter
+}
+type KafkaConsumerStarter struct {
 	infra.BaseStarter
 }
 
-func KakfaClient() sarama.SyncProducer {
-	Check(clientEtcd)
-	return clientKafka
+func KakfaProducerClient() sarama.SyncProducer {
+	Check(kafkaProducer)
+	return kafkaProducer
 }
 
-func (k *KafkaStarter) Setup(ctx infra.StarterContext) {
+func KakfaConsumerClient() sarama.Consumer {
+	Check(kafkaConsumer)
+	return kafkaConsumer
+}
+
+func (k *KafkaProducerStarter) Setup(ctx infra.StarterContext) {
 	var ()
 	conf := ctx.Props()
 	config := sarama.NewConfig()
@@ -36,8 +44,26 @@ func (k *KafkaStarter) Setup(ctx infra.StarterContext) {
 	logrus.Info("kafka集群: ", addrsList)
 	client, err := sarama.NewSyncProducer(addrsList, config)
 	if err != nil {
-		fmt.Println("producer close, err:", err)
+		panic("producer close, err:" + err.Error())
 		return
 	}
-	clientKafka = client
+	kafkaProducer = client
+}
+
+func (k *KafkaConsumerStarter) Setup(ctx infra.StarterContext) {
+	var ()
+	conf := ctx.Props()
+
+	addrs := conf.GetDefault("kafka.endpoints", "127.0.0.1:9092")
+	if addrs == "" {
+		panic("获取kafka集群失败")
+	}
+	addrsList := strings.Split(addrs, ",")
+	logrus.Info("kafka集群: ", addrsList)
+	client, err := sarama.NewConsumer(addrsList, nil)
+	if err != nil {
+		panic("producer close, err:" + err.Error())
+		return
+	}
+	kafkaConsumer = client
 }

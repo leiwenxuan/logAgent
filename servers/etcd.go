@@ -33,6 +33,7 @@ func (l *LogEntry) WatchTailJob() (err error) {
 	client := base.EtcdClient()
 	jobWatch := clientv3.NewWatcher(client)
 	logAgnetKey, err := GetLocalIP()
+
 	if err != nil {
 		logrus.Error(err)
 		panic("获取本机ip失败")
@@ -58,6 +59,7 @@ func (l *LogEntry) WatchTailJob() (err error) {
 	for _, v := range logEntryList {
 		jobEvent := BuildJobEvent(JOB_EVENT_SAVE, v)
 		GScheduler.PushJobEvent(jobEvent)
+
 	}
 
 	// 从当前revision 版本向后监听

@@ -11,6 +11,7 @@ require (
 	github.com/coreos/etcd v3.3.18+incompatible
 	github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
+	github.com/elastic/go-elasticsearch/v7 v7.5.0
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect
 	github.com/fastly/go-utils v0.0.0-20180712184237-d95a45783239 // indirect
 	github.com/go-ini/ini v1.51.1 // indirect
@@ -39,6 +40,7 @@ require (
 	github.com/mattn/go-colorable v0.1.4
 	github.com/mgutz/ansi v0.0.0-20170206155736-9520e82c474b // indirect
 	github.com/moul/http2curl v1.0.0 // indirect
+	github.com/olivere/elastic/v7 v7.0.10
 	github.com/onsi/ginkgo v1.11.0 // indirect
 	github.com/onsi/gomega v1.8.1 // indirect
 	github.com/prometheus/client_golang v1.4.0 // indirect

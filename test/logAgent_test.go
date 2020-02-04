@@ -14,7 +14,7 @@ import (
 
 func TestGetEtcdConfPath(t *testing.T) {
 	infra.Register(&base.EtcdStarter{})
-	infra.Register(&base.KafkaStarter{})
+	infra.Register(&base.KafkaProducerStarter{})
 
 	file := kvs.GetCurrentFilePath("conf.ini", 1)
 	logrus.Info("配置文件： ", file)

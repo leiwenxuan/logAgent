@@ -3,6 +3,8 @@ package servers
 import (
 	"encoding/json"
 	"strings"
+
+	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -46,5 +48,7 @@ func UnpackJob(value []byte) (ret *LogEntry, err error) {
 
 func BuildJobScheduleExecutor(entry *LogEntry) (tailJob *TailJobMgr) {
 	tailJob = NewTailJob(entry.LogPath, entry.Topic)
+	logrus.Debug("开始执行Es同步")
+	_ = TransferToES(tailJob)
 	return tailJob
 }

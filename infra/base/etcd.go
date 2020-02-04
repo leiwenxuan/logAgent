@@ -48,9 +48,11 @@ func (s *EtcdStarter) Setup(ctx infra.StarterContext) {
 
 	// 建立连接
 	if client, err = clientv3.New(config); err != nil {
+		panic("连接失败")
 		return
 	}
+
 	clientEtcd = client
-	log.Debug("clientMongo etcd:", clientEtcd)
+	log.Debug("client etcd:", clientEtcd)
 	return
 }

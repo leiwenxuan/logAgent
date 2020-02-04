@@ -6,7 +6,10 @@ import (
 )
 
 func init() {
+	infra.Register(&base.PropsStarter{})
 	infra.Register(&base.EtcdStarter{})
-	infra.Register(&base.KafkaStarter{})
+	infra.Register(&base.KafkaProducerStarter{})
+	infra.Register(&base.KafkaConsumerStarter{})
+	infra.Register(&base.ESStarter{})
 
 }

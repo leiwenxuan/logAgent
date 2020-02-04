@@ -21,6 +21,7 @@ var (
 )
 
 func NewTailJob(path string, topic string) (tailJob *TailJobMgr) {
+	// 上下文管理， 在日志配置变更时候关闭日志收集协程， 重新监听新的文件
 	ctx, cancel := context.WithCancel(context.TODO())
 	tailJob = &TailJobMgr{
 		path:       path,
@@ -31,6 +32,7 @@ func NewTailJob(path string, topic string) (tailJob *TailJobMgr) {
 	if err := tailJob.Init(); err != nil {
 		logrus.Error("打开文件失败： ", err)
 	}
+
 	return
 }
 
@@ -68,9 +70,7 @@ func (t *TailJobMgr) run() {
 			// 配置更新退出程序
 			return
 		case line = <-t.instance.Lines:
-			logrus.Debug(line.Text)
 			SendToChan(t.topic, line.Text)
 		}
 	}
-
 }

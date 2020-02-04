@@ -20,8 +20,11 @@ func main() {
 
 	// 初始化监听器
 	_ = servers.GlogMgr.WatchTailJob()
-	// 启动kafka监听器
-	servers.SendToKafka()
+	// 启动kafka, 初始化
+	go servers.InitKafkaProducer()
+	// TODO 创建Kafka分区
+	servers.InitEs(5)
+
 	// 初始资源阻塞进程
 	ch := make(chan int, 1)
 	<-ch

@@ -51,6 +51,7 @@ func (s *Scheduler) HandleJobEvent(jobEvent *JobEvent) {
 		}
 
 		jobPlan = BuildJobScheduleExecutor(jobEvent.Job)
+
 		s.jobExecutingTable[jobEvent.Job.logName] = jobPlan
 		logrus.Debug("开始执行logAgent")
 	case JOB_EVENT_DELETE:
